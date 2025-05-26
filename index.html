@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Speech Translation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+
+  <!-- SEO Meta -->
+  <meta name="description" content=" Speak naturally and get instant translations with voice output. Spekoo is a real-time speech translator that helps you break language barriers instantly." />
+  <meta name="keywords" content="speech translation, live translation, voice translator, real-time speech translator, Spekoo, speech to speech, language translation online" />
+  <meta name="author" content="Spekoo" />
+  <link rel="canonical" href="https://spekoo.live/" />
+
+  <!-- Open Graph (Facebook) -->
+  <meta property="og:title" content="Spekoo — Real-Time Speech Translator" />
+  <meta property="og:description" content="Break language barriers live with our speech-to-speech translator. Fast, intuitive, and voice-enabled." />
+  <meta property="og:image" content="https://roopdon49.github.io/Spekoo/image.png" />
+  <meta property="og:url" content="https://spekoo.live/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Spekoo.live — Real-Time Speech-to-Speech Translator" />
+  <meta name="twitter:description" content="Translate your voice instantly across languages using Spekoo.live. Simple, fast, and accurate." />
+  <meta name="twitter:image" content="https://roopdon49.github.io/Spekoo/image.png" />
+  
+
+<link rel="icon" type="image/png" href="https://roopdon49.github.io/Spekoo/image.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --primary: #007aff;
+      --danger: #ff3b30;
+      --bg: #f2f4f8;
+      --card-bg: #ffffff;
+      --text: #1e1e1e;
+      --box-bg: #fefefe;
+    }
+
+    body.dark {
+      --bg: #1c1c1e;
+      --card-bg: #2c2c2e;
+      --text: #f4f4f4;
+      --box-bg: #3a3a3c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .top-bar {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 2rem;
+      color: var(--primary);
+      flex-wrap: wrap;
+    }
+
+    .title img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .dark-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 500;
+      font-size: 14px;
+      background: var(--card-bg);
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+    }
+
+    .container {
+      background: var(--card-bg);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 750px;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    select {
+      flex: 1 1 48%;
+      padding: 10px 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+    }
+
+    body.dark select {
+      background: #333;
+      color: white;
+      border-color: #444;
+    }
+
+    #toggleBtn {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--primary);
+      color: white;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    #toggleBtn.stop {
+      background-color: var(--danger);
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section h3 {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .box {
+      background: var(--box-bg);
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      min-height: 80px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 16px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .box strong {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+
+.faq-toggle {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  background: var(--box-bg);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--primary);
+  font-size: 1.1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.faq-item {
+  margin-bottom: 10px;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  background: var(--box-bg);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+  color: var(--primary);
+}
+
+.caret {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+  font-size: 1.2em;
+}
+
+.faq-question.active .caret {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  display: none;
+  padding: 8px;
+  background: var(--card-bg);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin: 5px;
+  font-size: 0.95em;
+}
+
+
+.faq-question {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+  color: var(--primary);
+  padding: 8px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-answer {
+  display: none;
+  color: var(--text);;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+
+.toggle-icon {
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active .toggle-icon {
+  transform: rotate(180deg);
+}
+
+
+
+
+
+    .copy-icon {
+      cursor: pointer;
+      font-size: 20px;
+      color: #555;
+      transition: transform 0.2s ease;
+    }
+
+    .copy-icon:hover {
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 600px) {
+      .row {
+        flex-direction: column;
+      }
+
+      select {
+        flex: 1 1 100%;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .title {
+        font-size: 1.5rem;
+        gap: 8px;
+      }
+    }
+  </style>
+  
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Spekoo",
+   "alternateName": ["Spekoo", "Live Translator", "spekoo Voice Translator"," voice translation","speech translation","speech to speech translation"]
+
+  "operatingSystem": "All",
+  "applicationCategory": "CommunicationApplication",
+  "description": "Spekoo.live is a real-time speech-to-speech translator with voice output. Break language barriers instantly.",
+  "url": "https://spekoo.live/",
+  "image": "https://roopdon49.github.io/Spekoo/image.png",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Spekoo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://roopdon49.github.io/Spekoo/image.png"
+    }
+  }
+}
+</script>
+
+
+  
+  
+  
+</head>
+
+
+
+<body>
+
+  <div class="top-bar">
+  
+  
+
+<div class="title" style="position: relative; display: flex; align-items: center; justify-content: center; gap: 10px;">
+  <a style="display: flex; align-items: center; text-decoration: none; color: inherit; gap: 10px;">
+    <img src="https://roopdon49.github.io/Spekoo/image.png" alt="Logo" style="height: 40px; width: 40px;">
+    <span style="font-size: 1em;">Spekoo</span>
+  </a>
+  
+  <a href="https://play.google.com/store/apps/details?id=com.spekoo" target="_blank" style="position: absolute; right: 0; top: 0;">
+    <img src="https://roopdon49.github.io/Spekoo/1000049035-removebg-preview.png"
+         alt="Corner Image"
+         style="height: 30px; width: 30px; cursor: pointer;">
+  </a>
+
+
+
+<h1 style="margin: 0 0 4px 8px; font-size: 0.7em; text-align: center;">
+  Live Speech or Voice Translation online
+</h1>
+<h2 style="margin: 0 0 0 8px; font-size: 0.6em; color: var(--text); text-align: center;">
+  Translate speech or voice at real time and also listen in your language.
+</h2>
+
+ 
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <div class="dark-toggle" onclick="toggleDarkMode()">🌓 <span id="themeLabel">Dark Mode</span></div>
+  </div>
+
+  <div class="container">
+    <div class="row" style="flex-direction: column; gap: 12px;">
+  <label for="recognizeLang"><strong>🎙️ Recognition Language (Your Speech)</strong></label>
+  <select id="recognizeLang" style="width: 100%; max-width: 100%; padding: 10px 12px; font-size: 16px; border-radius: 10px; border: 1px solid #ccc;"></select>
+
+  <label for="translateLang"><strong>🌐 Translation Language</strong></label>
+  <select id="translateLang" style="width: 100%; max-width: 100%; padding: 10px 12px; font-size: 16px; border-radius: 10px; border: 1px solid #ccc;"></select>
+
+  <label for="voiceSelect"><strong>🗣️ Voice for Translated Speech</strong></label>
+  <select id="voiceSelect" style="width: 100%; max-width: 100%; padding: 10px 12px; font-size: 16px; border-radius: 10px; border: 1px solid #ccc;"></select>
+</div>
+
+
+<div id="customAlert" style="display:none; position:fixed; left:50%; transform:translateX(-50%);
+  background:white; border-radius:10px; padding:20px; box-shadow:0 0 10px rgba(0,0,0,0.3);
+  z-index:10000; max-width:800px; width:90%; text-align:center; font-family: sans-serif; top:20px;">
+
+  
+  
+  <img src="https://roopdon49.github.io/Spekoo/image.png" alt="Spekoo" style="width:40px; height:40px;  border-radius:10px; flex-shrink:0;">
+  
+  <h3 style="margin-top:0; font-weight:bold;">Spekoo</h3>
+  <p id="customAlertText" style="margin: 15px 0;"></p>
+  <button onclick="closeCustomAlert()" style="padding:8px 20px; border:none; background:#007BFF; color:#fff; border-radius:5px; cursor:pointer;">
+    OK
+  </button>
+</div>
+
+
+
+
+
+    <button id="toggleBtn">🎤 Start Listening</button>
+
+
+    <div class="section">
+      <h3>Recognized Speech</h3>
+      <div id="recognizedText" class="box"></div>
+    </div>
+
+    <div class="section">
+      <h3>
+        Translated Text
+        <span class="copy-icon" onclick="copyTranslatedText()" style="cursor: pointer;">📋</span>
+        
+           <span class="opy-icon" onclick="opyTranslatedText()" style="cursor: pointer;">📥.mp3</span>
+        
+      </h3>
+      <div id="translatedText" class="box"></div>
+    </div>
+  </div>
+
+
+
+<!-- FAQ Section -->
+<!-- FAQ Section -->
+<div class="container" style="margin-top: 15px;">
+  <button class="faq-toggle" onclick="toggleFAQSection()">
+    ❓ Frequently Asked Questions <span id="faq-caret">^</span>
+  </button>
+
+  <div id="faq-content" style="display: none;">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>What is Spekoo?</span>
+        <span class="caret">^</span>
+      </button>
+      <div class="faq-answer">Spekoo is a real-time speech-to-speech translation tool that helps you communicate across languages instantly.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>Is Spekoo free to use?</span>
+        <span class="caret">^</span>
+      </button>
+      <div class="faq-answer">Yes, Spekoo is completely free with no usage limits.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>Which languages are supported?</span>
+        <span class="caret">^</span>
+      </button>
+      <div class="faq-answer">Spekoo supports 100+ languages for both speech recognition and voice translation.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Custom Expandable Section -->
+<div class="container" style="margin-top: 10px;">
+  <div class="faq-question" onclick="toggleSection('spekoo-body', this)">
+    Conditions in which spekoo help :- <span class="toggle-icon">^</span>
+  </div>
+ 
+
+<div id="spekoo-body" class="faq-answer">
+  <strong style="color:deepskyblue;">✅ Neutral/Informative :</strong>
+  <p>“1. Attending a live event in a foreign language? Spekoo STS lets you hear the speaker in your own language instantly.”</p>
+  <p>“2. With Spekoo STS, language is no longer a barrier—you can understand live speeches in your native language in real time.”</p>
+  <p>“3. Don’t miss a word. Spekoo STS translates live lectures into your language as they happen.”</p>
+
+  <br>
+
+  <strong style="color:deepskyblue;">📣 Promotional :</strong>
+  <p>“4. Break the language barrier with Spekoo STS—listen to any speaker in your language, instantly and effortlessly!”</p>
+  <p>“5. Live talk. Different language? No problem. Spekoo STS brings the speaker's voice to you in real time—in your language.”</p>
+  <p>“6. Global lectures, local understanding. Spekoo STS delivers real-time speech translation straight to your ears.”</p>
+
+  <br>
+
+  <strong style="color:deepskyblue;">👨‍🏫 Educational Context :</strong>
+  <p>“7. Learning in another language can be tough. Spekoo STS helps you follow live lectures in your preferred language without missing a beat.”</p>
+  <p>“8. Students attending international seminars can rely on Spekoo STS to understand every word in real time, no matter the language.”</p>
+
+  <br>
+
+  <strong style="color:deepskyblue;">🗣️ Conversational/Casual :</strong>
+  <p>“9. Ever been in a lecture where you couldn't understand the speaker? With Spekoo STS, you can hear them in your own language instantly.”</p>
+  <p>“10. No more guessing what the speaker said—Spekoo STS translates live speech for you on the spot.”</p>
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.continuous = true;
+  recognition.interimResults = false; // Only final results
+  recognition.maxAlternatives = 1;
+
+  const toggleBtn = document.getElementById('toggleBtn');
+  const recognizedTextDiv = document.getElementById('recognizedText');
+  const translatedTextDiv = document.getElementById('translatedText');
+  const recognizeLangSelect = document.getElementById('recognizeLang');
+  const translateLangSelect = document.getElementById('translateLang');
+  const voiceSelect = document.getElementById('voiceSelect');
+  const themeLabel = document.getElementById('themeLabel');
+
+  let isListening = false;
+  let lastRecognized = "";
+  let silenceTimer;
+  let isDesktopAlertShown = false;
+
+  const languages = [
+  
+  
+  
+   
+  { name: "Afrikaans (South Africa)", code: "af-ZA", translate: "af" },
+  { name: "Afrikaans (Namibia)", code: "af-NA", translate: "af" },
+
+  { name: "Albanian (Albania)", code: "sq-AL", translate: "sq" },
+  { name: "Albanian (Kosovo)", code: "sq-XK", translate: "sq" },
+
+  { name: "Amharic (Ethiopia)", code: "am-ET", translate: "am" },
+
+  { name: "Arabic (Saudi Arabia)", code: "ar-SA", translate: "ar" },
+  { name: "Arabic (Egypt)", code: "ar-EG", translate: "ar" },
+  { name: "Arabic (United Arab Emirates)", code: "ar-AE", translate: "ar" },
+  { name: "Arabic (Jordan)", code: "ar-JO", translate: "ar" },
+  { name: "Arabic (Iraq)", code: "ar-IQ", translate: "ar" },
+  { name: "Arabic (Morocco)", code: "ar-MA", translate: "ar" }, 
+  
+  
+  
+
+  { name: "Armenian (Armenia)", code: "hy-AM", translate: "hy" },
+  { name: "Armenian (Lebanon)", code: "hy-LB", translate: "hy" },
+
+  { name: "Assamese (India)", code: "as-IN", translate: "as" },
+
+  { name: "Aymara (Bolivia)", code: "ay-BO", translate: "ay" },
+  { name: "Aymara (Peru)", code: "ay-PE", translate: "ay" },
+  { name: "Aymara (Chile)", code: "ay-CL", translate: "ay" },
+
+  { name: "Azerbaijani (Azerbaijan)", code: "az-AZ", translate: "az" },
+  { name: "Azerbaijani (Iran)", code: "az-IR", translate: "az" },
+
+  { name: "Bambara (Mali)", code: "bm-ML", translate: "bm" },
+
+  { name: "Basque (Spain)", code: "eu-ES", translate: "eu" },
+  { name: "Basque (France)", code: "eu-FR", translate: "eu" }, 
+  
+  
+  
+ 
+  { name: "Belarusian (Belarus)", code: "be-BY", translate: "be" },
+
+  { name: "Bengali (India)", code: "bn-IN", translate: "bn" },
+  { name: "Bengali (Bangladesh)", code: "bn-BD", translate: "bn" },
+
+  { name: "Bhojpuri (India)", code: "bh-IN", translate: "bh" },
+  { name: "Bhojpuri (Nepal)", code: "bh-NP", translate: "bh" },
+
+  { name: "Bosnian (Bosnia and Herzegovina)", code: "bs-BA", translate: "bs" },
+  { name: "Bosnian (Kosovo)", code: "bs-XK", translate: "bs" },
+
+  { name: "Bulgarian (Bulgaria)", code: "bg-BG", translate: "bg" },
+
+  { name: "Catalan (Spain)", code: "ca-ES", translate: "ca" },
+  { name: "Catalan (France)", code: "ca-FR", translate: "ca" },
+  { name: "Catalan (Italy)", code: "ca-IT", translate: "ca" }, 
+  
+  
+  
+
+  { name: "Cebuano (Philippines)", code: "ceb-PH", translate: "ceb" },
+
+  { name: "Chichewa (Malawi)", code: "ny-MW", translate: "ny" },
+  { name: "Chichewa (Zambia)", code: "ny-ZM", translate: "ny" },
+  { name: "Chichewa (Zimbabwe)", code: "ny-ZW", translate: "ny" },
+
+  { name: "Chinese (Simplified, China)", code: "zh-CN", translate: "zh" },
+  { name: "Chinese (Simplified, Singapore)", code: "zh-SG", translate: "zh" },
+  { name: "Chinese (Simplified, Malaysia)", code: "zh-MY", translate: "zh" },
+
+  { name: "Chinese (Traditional, Taiwan)", code: "zh-TW", translate: "zh-TW" },
+  { name: "Chinese (Traditional, Hong Kong)", code: "zh-HK", translate: "zh-TW" },
+  { name: "Chinese (Traditional, Macau)", code: "zh-MO", translate: "zh-TW" },
+
+  { name: "Corsican (France)", code: "co-FR", translate: "co" }, 
+  
+  
+  
+  
+  { name: "Croatian (Croatia)", code: "hr-HR", translate: "hr" },
+  { name: "Croatian (Bosnia and Herzegovina)", code: "hr-BA", translate: "hr" },
+
+  { name: "Czech (Czech Republic)", code: "cs-CZ", translate: "cs" },
+
+  { name: "Danish (Denmark)", code: "da-DK", translate: "da" },
+  { name: "Danish (Greenland)", code: "da-GL", translate: "da" },
+
+  { name: "Dhivehi (Maldives)", code: "dv-MV", translate: "dv" },
+
+  { name: "Dogri (India)", code: "doi-IN", translate: "doi" },
+
+  { name: "Dutch (Netherlands)", code: "nl-NL", translate: "nl" },
+  { name: "Dutch (Belgium)", code: "nl-BE", translate: "nl" },
+  { name: "Dutch (Suriname)", code: "nl-SR", translate: "nl" }, 
+  
+  
+  
+  { name: "English (United Kingdom)", code: "en-GB", translate: "en" },
+  { name: "English (United States)", code: "en-US", translate: "en" },
+  { name: "English (Australia)", code: "en-AU", translate: "en" },
+  { name: "English (Canada)", code: "en-CA", translate: "en" },
+  { name: "English (New Zealand)", code: "en-NZ", translate: "en" },
+  { name: "English (Ireland)", code: "en-IE", translate: "en" },
+  { name: "English (South Africa)", code: "en-ZA", translate: "en" },
+
+  { name: "Esperanto (International)", code: "eo-UN", translate: "eo" },
+
+  { name: "Estonian (Estonia)", code: "et-EE", translate: "et" },
+
+  { name: "Ewe (Togo)", code: "ee-TG", translate: "ee" },
+  { name: "Ewe (Ghana)", code: "ee-GH", translate: "ee" }, 
+  
+  
+  
+  { name: "Filipino (Philippines)", code: "tl-PH", translate: "tl" },
+
+  { name: "Finnish (Finland)", code: "fi-FI", translate: "fi" },
+
+  { name: "French (France)", code: "fr-FR", translate: "fr" },
+  { name: "French (Belgium)", code: "fr-BE", translate: "fr" },
+  { name: "French (Switzerland)", code: "fr-CH", translate: "fr" },
+  { name: "French (Canada)", code: "fr-CA", translate: "fr" },
+  { name: "French (Martinique)", code: "fr-MQ", translate: "fr" },
+
+  { name: "Frisian (Netherlands)", code: "fy-NL", translate: "fy" },
+  { name: "Frisian (Germany)", code: "fy-DE", translate: "fy" },
+
+  { name: "Galician (Spain)", code: "gl-ES", translate: "gl" },
+
+  { name: "Georgian (Georgia)", code: "ka-GE", translate: "ka" },
+
+  { name: "German (Germany)", code: "de-DE", translate: "de" }, 
+  
+  
+  
+ 
+  { name: "German (Austria)", code: "de-AT", translate: "de" },
+  { name: "German (Switzerland)", code: "de-CH", translate: "de" },
+  { name: "German (Luxembourg)", code: "de-LU", translate: "de" },
+  { name: "German (Liechtenstein)", code: "de-LI", translate: "de" },
+
+  { name: "Greek (Greece)", code: "el-GR", translate: "el" },
+  { name: "Greek (Cyprus)", code: "el-CY", translate: "el" },
+
+  { name: "Guarani (Paraguay)", code: "gn-PY", translate: "gn" },
+  { name: "Guarani (Bolivia)", code: "gn-BO", translate: "gn" },
+
+  { name: "Gujarati (India)", code: "gu-IN", translate: "gu" },
+
+  { name: "Haitian Creole (Haiti)", code: "ht-HT", translate: "ht" },
+
+  { name: "Hausa (Nigeria)", code: "ha-NG", translate: "ha" },
+  { name: "Hausa (Niger)", code: "ha-NE", translate: "ha" },
+  { name: "Hausa (Ghana)", code: "ha-GH", translate: "ha" }, 
+  
+  
+  
+
+  { name: "Hawaiian (United States)", code: "haw-US", translate: "haw" },
+
+  { name: "Hebrew (Israel)", code: "he-IL", translate: "he" },
+
+  { name: "Hindi (India)", code: "hi-IN", translate: "hi" },
+  { name: "Hindi (Fiji)", code: "hi-FJ", translate: "hi" },
+
+  { name: "Hmong (China)", code: "hmn-CN", translate: "hmn" },
+  { name: "Hmong (Vietnam)", code: "hmn-VN", translate: "hmn" },
+  { name: "Hmong (United States)", code: "hmn-US", translate: "hmn" },
+
+  { name: "Hungarian (Hungary)", code: "hu-HU", translate: "hu" },
+
+  { name: "Icelandic (Iceland)", code: "is-IS", translate: "is" },
+
+  { name: "Igbo (Nigeria)", code: "ig-NG", translate: "ig" },
+  { name: "Igbo (Guinea)", code: "ig-GN", translate: "ig" }, 
+  
+  
+  
+
+  { name: "Ilocano (Philippines)", code: "ilo-PH", translate: "ilo" },
+
+  { name: "Indonesian (Indonesia)", code: "id-ID", translate: "id" },
+
+  { name: "Irish (Ireland)", code: "ga-IE", translate: "ga" },
+
+  { name: "Italian (Italy)", code: "it-IT", translate: "it" },
+  { name: "Italian (Switzerland)", code: "it-CH", translate: "it" },
+  { name: "Italian (San Marino)", code: "it-SM", translate: "it" },
+  { name: "Italian (Vatican City)", code: "it-VA", translate: "it" }, 
+  
+  
+  
+  { name: "Japanese (Japan)", code: "ja-JP", translate: "ja" },
+
+  { name: "Javanese (Indonesia)", code: "jv-ID", translate: "jv" },
+
+  { name: "Kannada (India)", code: "kn-IN", translate: "kn" },
+
+  { name: "Kazakh (Kazakhstan)", code: "kk-KZ", translate: "kk" },
+  { name: "Kazakh (China - Xinjiang)", code: "kk-CN", translate: "kk" },
+
+  { name: "Khmer (Cambodia)", code: "km-KH", translate: "km" },
+
+  { name: "Kinyarwanda (Rwanda)", code: "rw-RW", translate: "rw" },
+
+  { name: "Konkani (India)", code: "kok-IN", translate: "kok" },
+
+  { name: "Korean (South Korea)", code: "ko-KR", translate: "ko" },
+  { name: "Korean (North Korea)", code: "ko-KP", translate: "ko" }, 
+  
+  
+  
+  { name: "Krio (Sierra Leone)", code: "kri-SL", translate: "kri" },
+
+  { name: "Kurdish Kurmanji (Turkey)", code: "ku-TR", translate: "ku" },
+  { name: "Kurdish Kurmanji (Iraq)", code: "ku-IQ", translate: "ku" },
+  { name: "Kurdish Kurmanji (Syria)", code: "ku-SY", translate: "ku" },
+  { name: "Kurdish Kurmanji (Iran)", code: "ku-IR", translate: "ku" },
+
+  { name: "Kurdish Sorani (Iraq)", code: "ckb-IQ", translate: "ckb" },
+  { name: "Kurdish Sorani (Iran)", code: "ckb-IR", translate: "ckb" },
+
+  { name: "Kyrgyz (Kyrgyzstan)", code: "ky-KG", translate: "ky" }, 
+  
+  
+  
+  { name: "Lao (Laos)", code: "lo-LA", translate: "lo" },
+
+  { name: "Latin (Vatican City)", code: "la-VA", translate: "la" },
+
+  { name: "Latvian (Latvia)", code: "lv-LV", translate: "lv" },
+
+  { name: "Lingala (DR Congo)", code: "ln-CD", translate: "ln" },
+  { name: "Lingala (Republic of Congo)", code: "ln-CG", translate: "ln" },
+  { name: "Lingala (Angola)", code: "ln-AO", translate: "ln" },
+  { name: "Lingala (Central African Republic)", code: "ln-CF", translate: "ln" },
+
+  { name: "Lithuanian (Lithuania)", code: "lt-LT", translate: "lt" },
+
+  { name: "Luganda (Uganda)", code: "lg-UG", translate: "lg" },
+
+  { name: "Luxembourgish (Luxembourg)", code: "lb-LU", translate: "lb" }, 
+  
+  
+ 
+  { name: "Macedonian (North Macedonia)", code: "mk-MK", translate: "mk" },
+
+  { name: "Maithili (India)", code: "mai-IN", translate: "mai" },
+  { name: "Maithili (Nepal)", code: "mai-NP", translate: "mai" },
+
+  { name: "Malagasy (Madagascar)", code: "mg-MG", translate: "mg" },
+
+  { name: "Malay (Malaysia)", code: "ms-MY", translate: "ms" },
+  { name: "Malay (Brunei)", code: "ms-BN", translate: "ms" },
+  { name: "Malay (Singapore)", code: "ms-SG", translate: "ms" },
+  { name: "Malay (Indonesia)", code: "ms-ID", translate: "ms" },
+
+  { name: "Malayalam (India)", code: "ml-IN", translate: "ml" },
+
+  { name: "Maltese (Malta)", code: "mt-MT", translate: "mt" }, 
+  
+  
+  
+  
+  { name: "Maori (New Zealand)", code: "mi-NZ", translate: "mi" },
+
+  { name: "Marathi (India)", code: "mr-IN", translate: "mr" },
+
+  { name: "Meiteilon (Manipuri, India)", code: "mni-IN", translate: "mni" },
+
+  { name: "Mizo (India)", code: "lus-IN", translate: "lus" },
+
+  { name: "Mongolian (Mongolia)", code: "mn-MN", translate: "mn" },
+  { name: "Mongolian (China, Inner Mongolia)", code: "mn-CN", translate: "mn" },
+
+  { name: "Myanmar (Burmese, Myanmar)", code: "my-MM", translate: "my" },
+
+  { name: "Nepali (Nepal)", code: "ne-NP", translate: "ne" },
+  { name: "Nepali (India)", code: "ne-IN", translate: "ne" }, 
+  
+  
+  
+
+  { name: "Norwegian (Norway)", code: "no-NO", translate: "no" },
+
+  { name: "Odia (Oriya, India)", code: "or-IN", translate: "or" },
+
+  { name: "Oromo (Ethiopia)", code: "om-ET", translate: "om" },
+  { name: "Oromo (Kenya)", code: "om-KE", translate: "om" },
+
+  { name: "Pashto (Afghanistan)", code: "ps-AF", translate: "ps" },
+  { name: "Pashto (Pakistan)", code: "ps-PK", translate: "ps" },
+
+  { name: "Persian (Iran)", code: "fa-IR", translate: "fa" },
+  { name: "Persian (Afghanistan, Dari)", code: "fa-AF", translate: "fa" },
+  { name: "Persian (Tajikistan, Tajiki)", code: "fa-TJ", translate: "fa" },
+
+  { name: "Polish (Poland)", code: "pl-PL", translate: "pl" }, 
+  
+  
+
+
+
+  { name: "Portuguese (Portugal)", code: "pt-PT", translate: "pt" },
+  { name: "Portuguese (Brazil)", code: "pt-BR", translate: "pt" },
+  { name: "Portuguese (Mozambique)", code: "pt-MZ", translate: "pt" },
+  { name: "Portuguese (Angola)", code: "pt-AO", translate: "pt" },
+
+  { name: "Punjabi (India)", code: "pa-IN", translate: "pa" },
+  { name: "Punjabi (Pakistan)", code: "pa-PK", translate: "pa" },
+
+  { name: "Quechua (Peru)", code: "qu-PE", translate: "qu" },
+  { name: "Quechua (Bolivia)", code: "qu-BO", translate: "qu" },
+  { name: "Quechua (Ecuador)", code: "qu-EC", translate: "qu" },
+
+  { name: "Romanian (Romania)", code: "ro-RO", translate: "ro" },
+  { name: "Romanian (Moldova)", code: "ro-MD", translate: "ro" },
+
+  { name: "Russian (Russia)", code: "ru-RU", translate: "ru" },
+  { name: "Russian (Belarus)", code: "ru-BY", translate: "ru" },
+  { name: "Russian (Kazakhstan)", code: "ru-KZ", translate: "ru" }, 
+  
+  
+  
+  { name: "Russian (Kyrgyzstan)", code: "ru-KG", translate: "ru" },
+
+  { name: "Samoan (Samoa)", code: "sm-WS", translate: "sm" },
+
+  { name: "Sanskrit (India)", code: "sa-IN", translate: "sa" },
+
+  { name: "Scots Gaelic (Scotland)", code: "gd-GB", translate: "gd" },
+
+  { name: "Sepedi (South Africa)", code: "nso-ZA", translate: "nso" },
+
+  { name: "Serbian (Serbia)", code: "sr-RS", translate: "sr" },
+  { name: "Serbian (Montenegro)", code: "sr-ME", translate: "sr" },
+  { name: "Serbian (Bosnia and Herzegovina)", code: "sr-BA", translate: "sr" },
+
+  { name: "Sesotho (Lesotho)", code: "st-LS", translate: "st" },
+  { name: "Sesotho (South Africa)", code: "st-ZA", translate: "st" }, 
+  
+  
+  
+  
+
+  { name: "Shona (Zimbabwe)", code: "sn-ZW", translate: "sn" },
+
+  { name: "Sindhi (Pakistan)", code: "sd-PK", translate: "sd" },
+  { name: "Sindhi (India)", code: "sd-IN", translate: "sd" },
+
+  { name: "Sinhala (Sri Lanka)", code: "si-LK", translate: "si" },
+
+  { name: "Slovak (Slovakia)", code: "sk-SK", translate: "sk" },
+
+  { name: "Slovenian (Slovenia)", code: "sl-SI", translate: "sl" },
+
+  { name: "Somali (Somalia)", code: "so-SO", translate: "so" },
+  { name: "Somali (Djibouti)", code: "so-DJ", translate: "so" },
+  { name: "Somali (Ethiopia)", code: "so-ET", translate: "so" },
+  { name: "Somali (Kenya)", code: "so-KE", translate: "so" }, 
+  
+  
+  
+
+  { name: "Spanish (Spain)", code: "es-ES", translate: "es" },
+  { name: "Spanish (Mexico)", code: "es-MX", translate: "es" },
+  { name: "Spanish (Argentina)", code: "es-AR", translate: "es" },
+  { name: "Spanish (Colombia)", code: "es-CO", translate: "es" },
+  { name: "Spanish (Chile)", code: "es-CL", translate: "es" },
+  { name: "Spanish (Peru)", code: "es-PE", translate: "es" },
+  { name: "Spanish (Venezuela)", code: "es-VE", translate: "es" },
+  { name: "Spanish (Cuba)", code: "es-CU", translate: "es" },
+  { name: "Spanish (Dominican Republic)", code: "es-DO", translate: "es" },
+  { name: "Spanish (Uruguay)", code: "es-UY", translate: "es" },
+  { name: "Spanish (Paraguay)", code: "es-PY", translate: "es" },
+  { name: "Spanish (Bolivia)", code: "es-BO", translate: "es" },
+  { name: "Spanish (Ecuador)", code: "es-EC", translate: "es" },
+  { name: "Spanish (Guatemala)", code: "es-GT", translate: "es" }, 
+  
+  
+  
+  
+  { name: "Spanish (Honduras)", code: "es-HN", translate: "es" },
+  { name: "Spanish (El Salvador)", code: "es-SV", translate: "es" },
+  { name: "Spanish (Nicaragua)", code: "es-NI", translate: "es" },
+  { name: "Spanish (Costa Rica)", code: "es-CR", translate: "es" },
+  { name: "Spanish (Panama)", code: "es-PA", translate: "es" },
+  { name: "Spanish (Puerto Rico)", code: "es-PR", translate: "es" },
+  { name: "Spanish (Equatorial Guinea)", code: "es-GQ", translate: "es" },
+
+  { name: "Sundanese", code: "su", translate: "su" },
+
+  { name: "Swahili (Tanzania)", code: "sw-TZ", translate: "sw" },
+  { name: "Swahili (Kenya)", code: "sw-KE", translate: "sw" },
+  { name: "Swahili (Uganda)", code: "sw-UG", translate: "sw" },
+  { name: "Swahili (DR Congo)", code: "sw-CD", translate: "sw" },
+
+  { name: "Swedish (Sweden)", code: "sv-SE", translate: "sv" },
+  { name: "Swedish (Finland)", code: "sv-FI", translate: "sv" }, 
+  
+  
+  
+  
+  { name: "Tajik", code: "tg", translate: "tg" },
+
+  { name: "Tamil (India - Tamil Nadu, Puducherry)", code: "ta-IN", translate: "ta" },
+  { name: "Tamil (Sri Lanka)", code: "ta-LK", translate: "ta" },
+  { name: "Tamil (Singapore)", code: "ta-SG", translate: "ta" },
+  { name: "Tamil (Malaysia)", code: "ta-MY", translate: "ta" },
+
+  { name: "Tatar (Russia - Tatarstan)", code: "tt-RU", translate: "tt" },
+
+  { name: "Telugu (India - Andhra Pradesh, Telangana)", code: "te-IN", translate: "te" },
+
+  { name: "Thai", code: "th", translate: "th" },
+
+  { name: "Tigrinya (Eritrea)", code: "ti-ER", translate: "ti" },
+  { name: "Tigrinya (Ethiopia - Tigray region)", code: "ti-ET", translate: "ti" }, 
+  
+  
+  
+
+  { name: "Tsonga (South Africa)", code: "ts-ZA", translate: "ts" },
+  { name: "Tsonga (Mozambique)", code: "ts-MZ", translate: "ts" },
+  { name: "Tsonga (Eswatini)", code: "ts-SZ", translate: "ts" },
+  { name: "Tsonga (Zimbabwe)", code: "ts-ZW", translate: "ts" },
+
+  { name: "Turkish (Turkey)", code: "tr-TR", translate: "tr" },
+  { name: "Turkish (Northern Cyprus)", code: "tr-CY", translate: "tr" },
+
+  { name: "Turkmen (Turkmenistan)", code: "tk-TM", translate: "tk" },
+
+  { name: "Ukrainian (Ukraine)", code: "uk-UA", translate: "uk" },
+
+  { name: "Urdu (Pakistan)", code: "ur-PK", translate: "ur" },
+  { name: "Urdu (India - Jammu & Kashmir)", code: "ur-IN", translate: "ur" },
+
+  { name: "Uyghur (China - Xinjiang)", code: "ug-CN", translate: "ug" }, 
+  
+  
+  
+
+  { name: "Uzbek (Uzbekistan)", code: "uz-UZ", translate: "uz" },
+  { name: "Vietnamese (Vietnam)", code: "vi-VN", translate: "vi" },
+  { name: "Welsh (Wales)", code: "cy-GB", translate: "cy" },
+  { name: "Western Frisian (Netherlands - Friesland)", code: "fy-NL", translate: "fy" },
+  { name: "Xhosa (South Africa)", code: "xh-ZA", translate: "xh" },
+  { name: "Yiddish (Worldwide Jewish diaspora)", code: "yi", translate: "yi" },
+  { name: "Yoruba (Nigeria)", code: "yo-NG", translate: "yo" },
+  { name: "Yoruba (Benin)", code: "yo-BJ", translate: "yo" },
+  { name: "Yoruba (Togo)", code: "yo-TG", translate: "yo" },
+  { name: "Zulu (South Africa)", code: "zu-ZA", translate: "zu" }
+
+  
+
+      
+    
+  ];
+
+  languages.forEach(lang => {
+    const opt1 = document.createElement("option");
+    opt1.value = lang.code;
+    opt1.textContent = lang.name;
+    recognizeLangSelect.appendChild(opt1);
+
+    const opt2 = document.createElement("option");
+    opt2.value = lang.translate;
+    opt2.textContent = lang.name;
+    translateLangSelect.appendChild(opt2);
+  });
+
+  recognizeLangSelect.value = "en-US";
+  translateLangSelect.value = "hi";
+
+  recognition.onresult = function(event) {
+    clearTimeout(silenceTimer);
+    const transcript = event.results[event.resultIndex][0].transcript.trim();
+    if (transcript !== lastRecognized) {
+      lastRecognized = transcript;
+      const previous = recognizedTextDiv.innerHTML.replace(/<strong>(.*?)<\/strong>/, '$1');
+      recognizedTextDiv.innerHTML = `<strong>${transcript}</strong>` + (previous ? `<br>${previous}` : '');
+      translateText(transcript, translateLangSelect.value);
+    }
+
+    // Stop after 1500ms of silence
+    silenceTimer = setTimeout(() => {
+      recognition.stop();
+    }, 1500);
+  };
+
+  recognition.onend = () => {
+    if (isListening) {
+      recognition.start();
+    } else {
+      console.log("Recognition stopped intentionally.");
+    }
+  };
+
+  function isDesktop() {
+    return window.innerWidth > 768 && !/Mobi|Android/i.test(navigator.userAgent);
+  }
+
+ function showCustomAlert(message) {
+  const alertBox = document.getElementById("customAlert");
+  const alertText = document.getElementById("customAlertText");
+
+  alertText.innerText = message;
+
+  if (isDesktop()) {
+    alertBox.style.top = "40px"; // Add margin from top
+    alertBox.style.transform = "translateX(-50%)";
+  } else {
+    alertBox.style.top = "50%";
+    alertBox.style.transform = "translate(-50%, -50%)";
+  }
+
+  alertBox.style.display = "block";
+}
+
+
+  function closeCustomAlert() {
+    document.getElementById("customAlert").style.display = "none";
+  }
+
+  toggleBtn.onclick = () => {
+    if (isListening) {
+      recognition.stop();
+      clearTimeout(silenceTimer);
+      toggleBtn.textContent = "🎤 Start Listening";
+      toggleBtn.classList.remove("stop");
+      isListening = false;
+    } else {
+      recognition.lang = recognizeLangSelect.value;
+      if (isDesktop() && !isDesktopAlertShown) {
+        showCustomAlert("For better speech recognition on desktop, please use an external microphone.");
+        isDesktopAlertShown = true;
+      }
+      recognition.start();
+      toggleBtn.textContent = "🛑 Stop Listening";
+      toggleBtn.classList.add("stop");
+      isListening = true;
+    }
+  };
+
+  function translateText(text, targetLang) {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        const translation = data[0].map(item => item[0]).join('');
+        let existing = translatedTextDiv.innerText.trim();
+        translatedTextDiv.innerText = translation + (existing ? '\n' + existing : '');
+        translatedTextDiv.scrollTop = 0;
+        speakText(translation);
+      })
+      .catch(() => {
+        translatedTextDiv.innerText = 'Translation error';
+      });
+  }
+
+  function speakText(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const selectedVoice = voiceSelect.value;
+    const voice = speechSynthesis.getVoices().find(v => v.name === selectedVoice);
+    if (voice) utterance.voice = voice;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utterance);
+  }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  showCustomAlert(
+    "👋 Welcome to Spekoo — Your Live Speech-to-Speech Translator!\n\n" +
+    "1️⃣ Choose the language you want to speak\n" +
+    "2️⃣ Select the language and voice for the translation\n" +
+    "3️⃣ Tap the \"Start\" button 🎤\n" +
+    "4️⃣ Begin speaking naturally 🗣️\n\n" +
+    "Spekoo will take care of the rest. Let's break language barriers together!"
+  );
+});
+
+
+
+
+function showCustomAlert(message) {
+  document.getElementById("customAlertText").innerText = message;
+  document.getElementById("customAlert").style.display = "block";
+}
+
+function closeCustomAlert() {
+  document.getElementById("customAlert").style.display = "none";
+}
+
+
+
+
+  function copyTranslatedText() {
+    const lines = translatedTextDiv.innerText.trim().split('\n').reverse();
+    const fullText = lines.join('\n');
+    navigator.clipboard.writeText(fullText).then(() => {
+      showCustomAlert("Translated Text copied 📄");
+    });
+  }
+  
+  
+  function opyTranslatedText() {
+  const lines = translatedTextDiv.innerText.trim().split('\n').reverse();
+  const fullText = lines.join('\n');
+
+  // Override closeCustomAlert temporarily
+  window.closeCustomAlert = function() {
+    document.getElementById("customAlert").style.display = "none";
+    window.open("https://play.google.com/store/apps/details?id=com.spekoo", "_blank");
+  };
+
+  showCustomAlert("For Download .mp3 with voice use Spekoo Application.🎥");
+}
+
+
+  
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    themeLabel.textContent = isDark ? "Light Mode" : "Dark Mode";
+  }
+  
+  
+  function toggleFAQ(button) {
+  button.classList.toggle('active');
+  const answer = button.nextElementSibling;
+  answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+}
+
+function toggleFAQSection() {
+  const faqContent = document.getElementById("faq-content");
+  const caret = document.getElementById("faq-caret");
+
+  if (faqContent.style.display === "none") {
+    faqContent.style.display = "block";
+    caret.style.transform = "rotate(180deg)";
+  } else {
+    faqContent.style.display = "none";
+    caret.style.transform = "rotate(0deg)";
+  }
+}
+
+  
+  
+  
+  function toggleSection(id, element) {
+    const body = document.getElementById(id);
+    body.style.display = body.style.display === "block" ? "none" : "block";
+    element.classList.toggle("active");
+  }
+
+  
+
+  function populateVoices() {
+    const voices = speechSynthesis.getVoices();
+    voiceSelect.innerHTML = "";
+    const currentLang = translateLangSelect.value.toLowerCase();
+    voices
+      .filter(v => v.lang.toLowerCase().startsWith(currentLang))
+      .forEach(voice => {
+        const opt = document.createElement("option");
+        opt.value = voice.name;
+        opt.textContent = `${voice.name} (${voice.lang})`;
+        voiceSelect.appendChild(opt);
+      });
+
+    if (voiceSelect.options.length === 0) {
+      voiceSelect.innerHTML = '<option>No voice available</option>';
+    }
+  }
+
+  translateLangSelect.addEventListener("change", populateVoices);
+  window.speechSynthesis.onvoiceschanged = populateVoices;
+  window.onload = populateVoices;
+</script>
+
+
+ 
+</body>
+
+
+
+</html>
+
+
+
+
